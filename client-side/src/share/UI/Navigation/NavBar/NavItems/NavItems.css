@@ -1,0 +1,52 @@
+.nav__list {
+  display: flex;
+  flex-basis: 35%;
+  align-self: stretch;
+}
+.nav__item {
+  list-style: none;
+}
+
+.nav__link {
+  text-decoration: none;
+}
+
+.nav-btn {
+  height: 100%;
+  padding: 1rem;
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+  background: none;
+  cursor: pointer;
+}
+
+.nav__link {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+  transition: all 0.3s;
+}
+.nav__link.active {
+  background: #f37735;
+}
+.nav__link:hover {
+  background: #f37735;
+}
+.logo__link {
+  text-decoration: none;
+}
+
+@media (max-width: 950px) {
+  .nav__list {
+    padding: 1rem 0;
+    margin: 2rem 0;
+    flex-direction: column;
+    line-height: 2;
+  }
+  .nav__item {
+    margin-bottom: 0.6rem;
+  }
+}

@@ -1,0 +1,49 @@
+.rate {
+  text-align: center;
+}
+.rate__star {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  margin-right: 0.4rem;
+  cursor: pointer;
+}
+.rate__review {
+  padding: 1rem;
+  border: none;
+  outline: none;
+  transition: all 0.2s;
+  display: block;
+  box-shadow: 0 10px 10px grey;
+}
+.rate__review:focus {
+  transform: scale(0.99);
+  box-shadow: 0 4px 4px grey;
+}
+.rate__btn {
+  display: block;
+  margin-top: 1rem;
+  background: purple;
+  display: inline;
+}
+.rate__btn:hover,
+.rate__cancel:hover {
+  transform: translate(0) scale(1);
+  color: black;
+}
+.rate__btn:disabled {
+  background: rgba(128, 0, 128, 0.308);
+  color: white;
+  cursor: not-allowed;
+}
+.rate__cancel {
+  display: block;
+  margin-top: 1rem;
+  background: #ff0000;
+  display: inline;
+  margin-left: 1rem;
+}
+.rate__state {
+  font-size: 1.4rem;
+  margin: 1rem 0;
+  text-transform: uppercase;
+}

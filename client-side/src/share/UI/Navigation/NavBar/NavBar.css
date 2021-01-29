@@ -1,0 +1,26 @@
+.nav__lists {
+  display: flex;
+  justify-content: space-between;
+  background: whitesmoke;
+  align-items: center;
+  min-height: 2.8rem;
+}
+
+.sidedrawer-container {
+  background: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  display: none;
+  min-height: 2.8rem;
+}
+
+@media (max-width: 950px) {
+  .nav__lists {
+    display: none;
+  }
+  .sidedrawer-container {
+    display: flex;
+  }
+}

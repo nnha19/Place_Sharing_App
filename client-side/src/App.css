@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+}
+
+.wrapper {
+  position: relative;
+  min-height: 100vh;
+  background: rgba(128, 128, 128, 0.288);
+}

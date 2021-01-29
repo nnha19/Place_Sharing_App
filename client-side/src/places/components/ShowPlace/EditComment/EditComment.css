@@ -1,0 +1,21 @@
+.edit-comment {
+  background: white;
+  min-width: 6rem;
+  z-index: 1000;
+  position: absolute;
+  color: black;
+  text-align: center;
+  padding: 0.5rem;
+  margin-bottom: 0.8rem;
+  display: none;
+}
+.edit-comment__item {
+  display: block;
+  margin: 0.2rem 0;
+}
+.edit-comment__item:hover {
+  background: rgba(128, 128, 128, 0.397);
+}
+.show-edit-comment {
+  display: inline-block;
+}

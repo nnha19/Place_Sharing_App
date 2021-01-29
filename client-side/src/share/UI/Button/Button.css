@@ -1,0 +1,21 @@
+.btn {
+  width: 6rem;
+  height: 2rem;
+  background: #ff6e69d3;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: white;
+  transition: all 0.4s;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+.btn:hover {
+  background: #ff6e6977;
+  color: purple;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  background: #ff6e6949;
+}

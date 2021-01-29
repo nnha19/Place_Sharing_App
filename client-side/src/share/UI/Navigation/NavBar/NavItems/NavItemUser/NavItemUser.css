@@ -1,0 +1,113 @@
+.user {
+  flex-basis: 40%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-right: 3rem;
+}
+
+.user__noti {
+  font-size: 1.4rem;
+  color: rgba(85, 23, 23, 0.7);
+  position: relative;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.user__noti--num {
+  font-size: 1rem;
+  color: white;
+  background: red;
+  border-radius: 50%;
+  display: inline-block;
+  height: 1rem;
+  padding: 0 0.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  transform: translate(5px, -12px);
+}
+.notis {
+  background: white;
+  box-shadow: 0 4px 4px grey;
+  width: 24rem;
+  position: absolute;
+  height: 34rem;
+  overflow: scroll;
+  right: 8rem;
+  top: 4rem;
+  display: none;
+  padding: 1rem 0;
+  z-index: 10;
+}
+.show-notis {
+  display: inline-block;
+}
+.noti {
+  line-height: 1.4;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  position: relative;
+  background: rgba(128, 0, 128, 0.096);
+}
+.noti__date {
+  text-align: end;
+}
+
+.user__infos {
+  margin: 0 1rem;
+  cursor: pointer;
+}
+.user__infos:hover {
+  color: rgba(0, 0, 255, 0.459);
+}
+.user__name {
+  margin: 0 0.4rem;
+  display: inline-block;
+}
+.user__noti-list {
+  margin: 0 auto;
+  width: 8rem;
+  text-align: center;
+  color: rgba(0, 0, 255, 0.473);
+  cursor: pointer;
+}
+.user__noti-list:hover {
+  color: rgba(0, 0, 255, 0.671);
+}
+
+.user__noti-text {
+  margin-left: 0.8rem;
+}
+
+.user__noti-close {
+  position: absolute;
+  right: 1rem;
+  top: -0.3rem;
+  cursor: pointer;
+  height: 2rem;
+  width: 2rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  border-radius: 50%;
+}
+.user__noti-close:hover {
+  background: grey;
+}
+
+@media (max-width: 950px) {
+  .user {
+    flex: 1;
+    margin: 0;
+  }
+}
+@media (max-width: 550px) {
+  .notis {
+    right: 4rem;
+  }
+}
