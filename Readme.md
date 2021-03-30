@@ -1,6 +1,1 @@
-This website is for place sharing.It has users log in functionalities and authorization.You can create place,if you are authorized,if you own the place you can delete it,you can 
-edit it.You can like and write comments on other users' places if you are logged in.You can also rate other users' places.This is built with MERN_Stack and it literally took me
-almost a moth to create this.There are some things that I still need to add,like file upload and error message displaying.I will be working on these things in the future.This is
-the biggest and longest web app I have ever created so far.I hope this will make a good portfolio.
-
-Thanks.
+This is a full-stack web created with mern-stack(Mongodb,Express,React,Node.Js).If users are logged in they can create places,write comments in other users' places,likes places and rate places.You will be notified if other users did any of these things on your places.You will be able to edit the places you created but not other users' places.File upload is currently not available but you can upload the images by putting the image link.Error messages will not be displayed either.It took me over a month to create this.Hopefully this will make a good portfolio.
