@@ -52,13 +52,15 @@ const App = () => {
     const resp = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/user/${userId}`
     );
+    const loginTimer =
+      respData.loginTimer || new Date().getTime() + 1000 * 60 * 60;
     const userAuth = {
       username,
       userId,
       token: respData.token,
+      loginTimer,
     };
     localStorage.setItem("userAuth", JSON.stringify(userAuth));
-    console.log(respData);
   };
 
   const logoutHandler = () => {
@@ -90,11 +92,13 @@ const App = () => {
   };
 
   useEffect(() => {
+    let respData;
     const userAuth = JSON.parse(localStorage.getItem("userAuth"));
     if (userAuth) {
-      const { username, userId, token } = userAuth;
-      const respData = { username, userId, token };
-      loginHandler(respData);
+      const { username, userId, token, loginTimer } = userAuth;
+      respData = { username, userId, token, loginTimer };
+      const currentTime = new Date().getTime();
+      if (loginTimer > currentTime) loginHandler(respData);
     }
   }, []);
 
