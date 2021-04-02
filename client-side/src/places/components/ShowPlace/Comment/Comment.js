@@ -25,7 +25,9 @@ const Comment = (props) => {
         type="text"
         value={comment.text}
       />
-      <Button className={props.btnCls}>Add</Button>
+      <Button className={props.btnCls}>
+        {props.addCommentLoading ? "Loading..." : "Add"}
+      </Button>
     </form>
   );
 };

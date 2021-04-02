@@ -24,6 +24,7 @@ const ShowPlace = (props) => {
   const [deleteWarning, setDeleteWarning] = useState(false);
   const [editCommentValue, setEditCommentValue] = useState("");
   const [likeIsLoading, setLikeIsLoading] = useState(false);
+  const [addCommentLoading, setAddCommentLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -44,49 +45,55 @@ const ShowPlace = (props) => {
   }, []);
 
   const addCommentHandler = async (text) => {
-    const placeComments = [
-      ...showPlace.comments,
-      {
-        username: authContext.userData.username,
-        author: authContext.userData.userId,
-        text,
-      },
-    ];
-    const placeWithComments = { ...showPlace };
-    placeWithComments.comments = placeComments;
-    const comment = {
-      author: authContext.userData.userId,
-      username: authContext.userData.username,
-      text: text,
-      editingComment: false,
-    };
-    const resp = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}/comments`,
-      comment,
-      {
-        headers: {
-          Authorization: authContext.token,
-        },
-      }
-    );
-    if (authContext.userData.userId !== showPlace.creator.author) {
-      const userNotiResp = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/user/${showPlace.creator.author}/notifications`,
+    try {
+      setAddCommentLoading(true);
+      const placeComments = [
+        ...showPlace.comments,
         {
           username: authContext.userData.username,
-          action: " commented on your place",
-          date: authContext.date,
+          author: authContext.userData.userId,
+          text,
         },
+      ];
+      const placeWithComments = { ...showPlace };
+      placeWithComments.comments = placeComments;
+      const comment = {
+        author: authContext.userData.userId,
+        username: authContext.userData.username,
+        text: text,
+        editingComment: false,
+      };
+      const resp = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}/comments`,
+        comment,
         {
           headers: {
             Authorization: authContext.token,
           },
         }
       );
-      authContext.updateUser(userNotiResp.data, showPlace.creator.author);
+      if (authContext.userData.userId !== showPlace.creator.author) {
+        const userNotiResp = await axios.post(
+          `${process.env.REACT_APP_BACKEND_URL}/user/${showPlace.creator.author}/notifications`,
+          {
+            username: authContext.userData.username,
+            action: " commented on your place",
+            date: authContext.date,
+          },
+          {
+            headers: {
+              Authorization: authContext.token,
+            },
+          }
+        );
+        authContext.updateUser(userNotiResp.data, showPlace.creator.author);
+      }
+      setShowPlace(resp.data);
+      setAddCommentLoading(false);
+    } catch (err) {
+      alert(err);
+      setAddCommentLoading(false);
     }
-
-    setShowPlace(resp.data);
   };
 
   const likedHandler = async () => {
@@ -457,6 +464,7 @@ const ShowPlace = (props) => {
               btnCls="comment-btn"
               textareaCls="comment-input"
               addComment={(comment) => addCommentHandler(comment)}
+              addCommentLoading={addCommentLoading}
             />
           ) : (
             <p>Sign in to discuss with other users.</p>
