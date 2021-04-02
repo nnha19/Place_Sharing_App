@@ -1,0 +1,7 @@
+.error-msg {
+  padding: 0.4rem 1rem;
+  margin: 1rem;
+}
+.error-msg__text {
+  color: red;
+}

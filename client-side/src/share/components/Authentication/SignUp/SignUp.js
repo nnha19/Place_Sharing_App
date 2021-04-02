@@ -6,6 +6,7 @@ import AuthContext from "../../../../context/authContext";
 import axios from "axios";
 import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
 import ImageUpload from "../../ImageUpload/ImageUpload";
+import ErrorMsg from "../../../errorMsg/errorMsg";
 
 const SignUp = (props) => {
   const history = useHistory();
@@ -80,10 +81,11 @@ const SignUp = (props) => {
   return (
     <>
       <LoadingSpinner showSpinner={isLoading} />
-      <div className="login-container">
+      <div>
         <div className="login">
           <h4 className="login__title">Create an account</h4>
           <form onSubmit={signUpHandler} className="form">
+            <ErrorMsg errorMessage={error} />
             <Input
               element="input"
               type="text"

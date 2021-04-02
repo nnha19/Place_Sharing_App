@@ -14,12 +14,7 @@ import axios from "axios";
 import moment from "moment";
 
 const App = () => {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth() + 1;
-  const day = today.getDate();
-
-  const date = moment(`${year}-${month}-${day}`, "YYYYMMDD").fromNow();
+  document.title = "Place Sharing App";
 
   const [token, setToken] = useState(null);
   const [userData, setUserData] = useState({ username: "", userId: "" });
@@ -102,7 +97,6 @@ const App = () => {
             curUser,
           },
           users,
-          date,
           updateUser: (noti, notiOwnerId) =>
             updateUserNotiHandler(noti, notiOwnerId),
         }}

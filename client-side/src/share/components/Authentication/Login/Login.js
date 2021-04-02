@@ -5,6 +5,7 @@ import Button from "../../../UI/Button/Button";
 import AuthContext from "../../../../context/authContext";
 import { useHistory } from "react-router-dom";
 import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
+import ErrorMsg from "../../../errorMsg/errorMsg";
 
 import "./Login.css";
 import axios from "axios";
@@ -69,6 +70,7 @@ const Login = (props) => {
         <div className="login">
           <h4 className="login__title">Login</h4>
           <form onSubmit={loginHandler} className="form">
+            <ErrorMsg errorMessage={error} />
             <Input
               element="input"
               type="text"
