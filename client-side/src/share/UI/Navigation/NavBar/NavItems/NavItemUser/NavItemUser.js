@@ -101,7 +101,15 @@ const NavItemUser = (props) => {
           {showMoreNoti}
         </div>
         <div onClick={goToProfileHandler} className="user__infos">
-          <img className="user__profile" src="" alt="profile-picture" />
+          {curUser.profileImg ? (
+            <img
+              className="user__profile"
+              src={curUser.profileImg}
+              alt="profile-picture"
+            />
+          ) : (
+            <span className="user__profile-name">{curUser.username[0]}</span>
+          )}
         </div>
       </div>
     </>
