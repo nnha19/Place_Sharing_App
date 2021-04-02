@@ -52,11 +52,19 @@ const App = () => {
     const resp = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/user/${userId}`
     );
+    const userAuth = {
+      username,
+      userId,
+      token: respData.token,
+    };
+    localStorage.setItem("userAuth", JSON.stringify(userAuth));
+    console.log(respData);
   };
 
   const logoutHandler = () => {
     setToken(null);
     setUserData({ username: "", userId: "" });
+    localStorage.clear();
   };
 
   const hideNotiHandler = (e) => {
@@ -80,6 +88,15 @@ const App = () => {
       setUsers(updateUsers);
     }
   };
+
+  useEffect(() => {
+    const userAuth = JSON.parse(localStorage.getItem("userAuth"));
+    if (userAuth) {
+      const { username, userId, token } = userAuth;
+      const respData = { username, userId, token };
+      loginHandler(respData);
+    }
+  }, []);
 
   return (
     <div onClick={hideNotiHandler} className="wrapper">
