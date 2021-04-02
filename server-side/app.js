@@ -14,10 +14,14 @@ app.use(express.json());
 app.locals.moment = require("moment");
 require("dotenv").config();
 
+console.log(process.env.DB_NAME);
+console.log(process.env.DB_USER);
+console.log(process.env.DB_PASSWORD);
+
 app.use(cors());
 mongoose
   .connect(
-    `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-shard-00-00.pkqmd.mongodb.net:27017,cluster0-shard-00-01.pkqmd.mongodb.net:27017,cluster0-shard-00-02.pkqmd.mongodb.net:27017/${process.env.DB_NAME}?ssl=true&replicaSet=atlas-5p5lw3-shard-0&authSource=admin&retryWrites=true&w=majority`,
+    `mongodb+srv://webtek:${process.env.DB_PASSWORD}@cluster0.yrg2a.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: false,

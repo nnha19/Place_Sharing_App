@@ -39,7 +39,7 @@ const Places = (props) => {
       );
     });
   } else {
-    places = null;
+    places = <p className="error-message">!No places to show.</p>;
   }
 
   return <div className="places">{places}</div>;

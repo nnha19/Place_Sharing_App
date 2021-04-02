@@ -50,7 +50,6 @@ const createUser = async (req, res, next) => {
           email,
           password: hashedPassword,
         });
-        console.log(newUser);
         try {
           const token = await jwt.sign(
             {
@@ -96,6 +95,7 @@ const loginUser = async (req, res, next) => {
           { expiresIn: "1h" },
           (err, tok) => {
             if (err) {
+              console.log(err);
               res.status(500).json("Something went wrong.");
             } else {
               token = tok;
