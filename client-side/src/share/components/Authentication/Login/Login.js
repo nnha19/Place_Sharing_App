@@ -32,7 +32,10 @@ const Login = (props) => {
     const data = { email: email.value, password: password.value };
     try {
       setIsLoading(true);
-      const resp = await axios.post("http://localhost:5000/user/login", data);
+      const resp = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/user/login`,
+        data
+      );
       authContext.login(resp.data.userData);
       setIsLoading(false);
       history.push("/");

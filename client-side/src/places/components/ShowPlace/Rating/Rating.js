@@ -15,7 +15,7 @@ const Rating = (props) => {
   useEffect(() => {
     (async () => {
       const resp = await axios.get(
-        `http://localhost:5000/place/${placeId}/rating`
+        `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}/rating`
       );
       setRatings(resp.data);
     })();

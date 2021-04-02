@@ -38,7 +38,10 @@ const SignUp = (props) => {
     };
     try {
       setIsLoading(true);
-      const resp = await axios.post("http://localhost:5000/user/signup", data);
+      const resp = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/user/signup`,
+        data
+      );
       console.log(resp);
       authContext.login(resp.data.userData);
       setIsLoading(false);

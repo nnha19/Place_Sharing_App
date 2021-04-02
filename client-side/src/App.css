@@ -11,4 +11,5 @@ body {
   position: relative;
   min-height: 100vh;
   background: rgba(128, 128, 128, 0.288);
+  overflow: hidden;
 }

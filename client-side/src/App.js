@@ -29,7 +29,7 @@ const App = () => {
 
   useEffect(() => {
     (async () => {
-      const resp = await axios.get("http://localhost:5000/user");
+      const resp = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user`);
       setUsers(resp.data);
     })();
   }, [userData]);
@@ -54,7 +54,9 @@ const App = () => {
     const { username, userId } = respData;
     setToken(respData.token);
     setUserData({ username, userId });
-    const resp = await axios.get(`http://localhost:5000/user/${userId}`);
+    const resp = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/user/${userId}`
+    );
   };
 
   const logoutHandler = () => {
@@ -73,7 +75,7 @@ const App = () => {
     const newNoti = curUser.notifications.every((n) => !n.new);
     if (!newNoti) {
       const resp = await axios.put(
-        `http://localhost:5000/user/${curUser._id}/notifications`
+        `${process.env.REACT_APP_BACKEND_URL}/user/${curUser._id}/notifications`
       );
       const currentUser = users.find((u) => u._id === userData.userId);
       const index = users.findIndex((u) => u._id === userData.userId);

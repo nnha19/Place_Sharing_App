@@ -29,7 +29,9 @@ const ShowPlace = (props) => {
     (async () => {
       try {
         setIsLoading(true);
-        const resp = await axios.get(`http://localhost:5000/place/${placeId}`);
+        const resp = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}`
+        );
         const place = resp.data;
 
         setIsLoading(false);
@@ -59,7 +61,7 @@ const ShowPlace = (props) => {
       editingComment: false,
     };
     const resp = await axios.post(
-      `http://localhost:5000/place/${placeId}/comments`,
+      `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}/comments`,
       comment,
       {
         headers: {
@@ -69,7 +71,7 @@ const ShowPlace = (props) => {
     );
     if (authContext.userData.userId !== showPlace.creator.author) {
       const userNotiResp = await axios.post(
-        `http://localhost:5000/user/${showPlace.creator.author}/notifications`,
+        `${process.env.REACT_APP_BACKEND_URL}/user/${showPlace.creator.author}/notifications`,
         {
           username: authContext.userData.username,
           action: " commented on your place",
@@ -93,7 +95,7 @@ const ShowPlace = (props) => {
       if (like.author === userId) {
         setLikeIsLoading(true);
         const resp = await axios.delete(
-          `http://localhost:5000/place/${placeId}/likes/${userId}`,
+          `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}/likes/${userId}`,
           {
             headers: {
               Authorization: authContext.token,
@@ -111,7 +113,7 @@ const ShowPlace = (props) => {
     }
     setLikeIsLoading(true);
     const resp = await axios.post(
-      `http://localhost:5000/place/${placeId}/likes`,
+      `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}/likes`,
       {
         username: authContext.userData.username,
         author: userId,
@@ -125,7 +127,7 @@ const ShowPlace = (props) => {
     );
     if (authContext.userData.userId !== showPlace.creator.author) {
       const userNotiResp = await axios.post(
-        `http://localhost:5000/user/${showPlace.creator.author}/notifications`,
+        `${process.env.REACT_APP_BACKEND_URL}/user/${showPlace.creator.author}/notifications`,
         {
           username: authContext.userData.username,
           action: " likes the place",
@@ -164,7 +166,7 @@ const ShowPlace = (props) => {
     try {
       setIsLoading(true);
       const deletePlace = await axios.delete(
-        `http://localhost:5000/place/${placeId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}`,
         {
           headers: {
             Authorization: authContext.token,
@@ -247,7 +249,7 @@ const ShowPlace = (props) => {
     } else {
       editCommentFunc();
       const resp = await axios.put(
-        `http://localhost:5000/place/${placeId}/comments/${id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}/comments/${id}`,
         editComment,
         {
           headers: {
@@ -266,7 +268,7 @@ const ShowPlace = (props) => {
       setShowPlace({ ...showPlace, comments: deleted });
     }, 100);
     const resp = await axios.delete(
-      `http://localhost:5000/place/${placeId}/comments/${id}`,
+      `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}/comments/${id}`,
       {
         headers: {
           Authorization: authContext.token,
@@ -422,9 +424,7 @@ const ShowPlace = (props) => {
                   </em>
                 </p>
                 <div className="like">
-                  <p className="like__counts">
-                    {showPlace.likes.length} people like this place
-                  </p>
+                  <p className="like__counts">{showPlace.likes.length} likes</p>
                   {authContext.authenticated && (
                     <Button
                       style={{ position: "relative" }}

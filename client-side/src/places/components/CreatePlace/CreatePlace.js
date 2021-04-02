@@ -62,11 +62,15 @@ const CreatePlace = (props) => {
       // formData.append("image", inputValues.image.value);
       // formData.append("username", authContext.userData.username);
       // formData.append("author", authContext.userData.userId);
-      const resp = await axios.post("http://localhost:5000/place", place, {
-        headers: {
-          Authorization: authContext.token,
-        },
-      });
+      const resp = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/place`,
+        place,
+        {
+          headers: {
+            Authorization: authContext.token,
+          },
+        }
+      );
       const newPlace = resp.data;
       history.push("/");
     } catch (err) {

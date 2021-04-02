@@ -98,7 +98,7 @@ const Rate = (props) => {
       props.closeRate();
       try {
         const resp = await axios.put(
-          `http://localhost:5000/place/${placeId}/rating/${props.ratingId}`,
+          `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}/rating/${props.ratingId}`,
           updateRating,
           {
             headers: {
@@ -128,7 +128,7 @@ const Rate = (props) => {
         star: starCount + " stars",
       };
       const resp = await axios.post(
-        `http://localhost:5000/place/${placeId}/rating`,
+        `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}/rating`,
         rating,
         {
           headers: {
@@ -141,7 +141,7 @@ const Rate = (props) => {
       setStarCount(0);
       setReview("");
       const notiResp = await axios.post(
-        `http://localhost:5000/user/${props.placeOwnerId}/notifications`,
+        `${process.env.REACT_APP_BACKEND_URL}/user/${props.placeOwnerId}/notifications`,
         {
           username: authContext.userData.username,
           action: " rated your place.",

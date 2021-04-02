@@ -47,7 +47,9 @@ const EditPlace = (props) => {
     (async () => {
       try {
         setIsLoading(true);
-        const resp = await axios.get(`http://localhost:5000/place/${placeId}`);
+        const resp = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}`
+        );
         const place = resp.data;
 
         const placeWithValues = {
@@ -87,7 +89,7 @@ const EditPlace = (props) => {
         date: new Date().toDateString(),
       };
       const resp = await axios.put(
-        `http://localhost:5000/place/${placeId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}`,
         place,
         {
           headers: {

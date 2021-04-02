@@ -12,7 +12,9 @@ const PlacesPage = (props) => {
     (async () => {
       try {
         setIsLoading(true);
-        const resp = await axios.get("http://localhost:5000/place");
+        const resp = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/place`
+        );
         const places = resp.data;
         if (places && places.length > 0) {
           setPlaces(places);

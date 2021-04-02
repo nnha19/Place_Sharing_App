@@ -12,11 +12,12 @@ const app = express();
 app.use(express.json());
 
 app.locals.moment = require("moment");
+require("dotenv").config();
 
 app.use(cors());
 mongoose
   .connect(
-    "mongodb://yelpcampDB:database@cluster0-shard-00-00.pkqmd.mongodb.net:27017,cluster0-shard-00-01.pkqmd.mongodb.net:27017,cluster0-shard-00-02.pkqmd.mongodb.net:27017/IncJour?ssl=true&replicaSet=atlas-5p5lw3-shard-0&authSource=admin&retryWrites=true&w=majority",
+    `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-shard-00-00.pkqmd.mongodb.net:27017,cluster0-shard-00-01.pkqmd.mongodb.net:27017,cluster0-shard-00-02.pkqmd.mongodb.net:27017/${process.env.DB_NAME}?ssl=true&replicaSet=atlas-5p5lw3-shard-0&authSource=admin&retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: false,
@@ -33,6 +34,6 @@ app.use("/place/:id/comments", commentsRoute);
 app.use("/place/:id/likes", likesRoute);
 app.use("/user/:uid/notifications", userNotificationsRoute);
 
-app.listen(5000, function () {
+app.listen(process.env.PORT || 5000, function () {
   console.log("Server has started.");
 });

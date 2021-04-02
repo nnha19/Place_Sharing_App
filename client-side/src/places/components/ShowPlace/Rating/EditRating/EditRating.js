@@ -27,7 +27,7 @@ const EditRating = (props) => {
     setLoading(true);
     props.hideRating("deleting");
     const resp = await axios.delete(
-      `http://localhost:5000/place/${placeId}/rating/${props.ratingId}`,
+      `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}/rating/${props.ratingId}`,
       {
         headers: {
           Authorization: props.authContext.token,

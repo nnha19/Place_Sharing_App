@@ -10,7 +10,7 @@ const UserPlacePage = (props) => {
   useEffect(() => {
     (async () => {
       const resp = await axios.get(
-        `http://localhost:5000/place/user/${params.uid}`
+        `${process.env.REACT_APP_BACKEND_URL}/place/user/${params.uid}`
       );
       setUser(resp.data);
     })();

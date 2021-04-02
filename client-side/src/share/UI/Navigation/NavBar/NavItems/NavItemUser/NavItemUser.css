@@ -111,3 +111,10 @@
     right: 4rem;
   }
 }
+
+@media (max-width: 390px) {
+  .notis {
+    width: 20rem;
+    right: 2rem;
+  }
+}

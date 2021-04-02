@@ -8,6 +8,7 @@
   padding: 0.5rem;
   margin-bottom: 0.8rem;
   display: none;
+  right: -7rem;
 }
 .edit-comment__item {
   display: block;
@@ -18,4 +19,10 @@
 }
 .show-edit-comment {
   display: inline-block;
+}
+
+@media (max-width: 1100px) {
+  .edit-comment {
+    right: 2rem;
+  }
 }

@@ -14,13 +14,6 @@ const getAllUsers = async (req, res, next) => {
           res.status(200).json(users);
         }
       });
-
-    // const users = await User.find({});
-    // if (users.length > 0) {
-    //   res.status(200).json({ users });
-    // } else {
-    //   res.json("No users found.Create One.");
-    // }
   } catch (err) {
     console.log(err);
     res.status(500).json("Something went wrong.");
@@ -64,7 +57,7 @@ const createUser = async (req, res, next) => {
               username: newUser.username,
               userId: newUser._id,
             },
-            "Secret_Key",
+            process.env.SECRET_KEY,
             { expiresIn: "1h" }
           );
           res.status(200).json({
@@ -99,7 +92,7 @@ const loginUser = async (req, res, next) => {
       if (validPassword) {
         jwt.sign(
           { username: user.username, userId: user._id },
-          "Secret_Key",
+          process.env.SECRET_KEY,
           { expiresIn: "1h" },
           (err, tok) => {
             if (err) {
