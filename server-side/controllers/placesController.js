@@ -64,6 +64,7 @@ const createPlace = async (req, res, next) => {
       image,
       creator,
       rating: [],
+      date: new Date(),
     });
 
     const user = await User.findById(creator.author);

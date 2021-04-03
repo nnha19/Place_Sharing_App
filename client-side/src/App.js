@@ -36,6 +36,8 @@ const App = () => {
     }
   }, [users, userData.userId]);
 
+  console.log(curUser);
+
   const updateUserNotiHandler = (notification, notiOwnerId) => {
     const notiOwner = users.find((u) => u._id === notiOwnerId);
     notiOwner.notifications.push(notification);
@@ -120,6 +122,7 @@ const App = () => {
           users,
           updateUser: (noti, notiOwnerId) =>
             updateUserNotiHandler(noti, notiOwnerId),
+          setShowNotis: (boolean) => setShowNotis(boolean),
         }}
       >
         <NavBar />

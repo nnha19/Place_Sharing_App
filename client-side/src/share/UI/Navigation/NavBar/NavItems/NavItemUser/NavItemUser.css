@@ -50,12 +50,19 @@
 .noti {
   line-height: 1.4;
   margin: 0.5rem 0;
-  padding: 1rem;
+  padding: 1.2rem 1rem;
   position: relative;
   background: rgba(128, 0, 128, 0.096);
+  cursor: pointer;
 }
+
+.noti:hover {
+  background: rgba(128, 128, 128, 0.459);
+}
+
 .noti__date {
   text-align: end;
+  margin-top: 1rem;
 }
 
 .user__infos {

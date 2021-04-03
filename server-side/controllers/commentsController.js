@@ -9,6 +9,7 @@ const createComments = async (req, res, next) => {
       author,
       username,
       text,
+      date: new Date(),
     });
     const place = await Place.findById(placeId);
     place.comments.push(newComment);

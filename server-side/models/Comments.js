@@ -7,7 +7,7 @@ const commentsSchema = new mongoose.Schema({
     ref: "user",
   },
   text: String,
-  date: { type: Date, default: Date.now() },
+  date: { type: String, required: true },
 });
 
 module.exports = mongoose.model("Comments", commentsSchema);

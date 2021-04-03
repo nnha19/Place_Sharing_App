@@ -78,7 +78,7 @@ const ShowPlace = (props) => {
           {
             username: authContext.userData.username,
             action: " commented on your place",
-            date: authContext.date,
+            placeId: showPlace._id,
           },
           {
             headers: {
@@ -138,7 +138,7 @@ const ShowPlace = (props) => {
         {
           username: authContext.userData.username,
           action: " likes the place",
-          date: authContext.date,
+          placeId: showPlace._id,
         },
         {
           headers: {

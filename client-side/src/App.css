@@ -13,3 +13,10 @@ body {
   background: rgba(128, 128, 128, 0.288);
   overflow: hidden;
 }
+
+.heading {
+  font-size: 1.2rem;
+  margin: 2rem;
+  text-transform: capitalize;
+  text-align: center;
+}

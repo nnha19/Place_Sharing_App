@@ -23,7 +23,7 @@ const placeSchema = new mongoose.Schema({
       ref: "Comments",
     },
   ],
-  date: { type: Date, default: Date.now() },
+  date: { type: String, required: true },
   rating: [
     {
       type: mongoose.Schema.Types.ObjectId,

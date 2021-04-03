@@ -4,13 +4,16 @@ const User = require("../models/User");
 const createNotification = async (req, res, next) => {
   try {
     const { uid } = req.params;
-    const { username, action } = req.body;
+    const { username, action, placeId } = req.body;
     const user = await User.findById(uid);
+    console.log(placeId);
     const newNoti = await Notifications.create({
       username,
       action,
       new: true,
       placeOwnerId: uid,
+      date: new Date(),
+      placeId,
     });
     user.notifications.push(newNoti);
     await user.save();

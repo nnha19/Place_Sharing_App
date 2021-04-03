@@ -31,11 +31,19 @@ const NavItemUser = (props) => {
     }
   }
 
+  const navigateToPlaceHandler = (placeId) => {
+    history.push(`/place/${placeId}`);
+    authContext.setShowNotis(false);
+  };
+
   notiOutPut =
     showNoti &&
     showNoti.map((notis) => {
       return (
-        <p className="noti">
+        <p
+          onClick={() => navigateToPlaceHandler(notis.placeId)}
+          className="noti"
+        >
           <strong>{notis.username}</strong>
           <span>{notis.action}</span>
           <p className="noti__date">{moment(notis.date).fromNow()}</p>

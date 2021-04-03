@@ -7,7 +7,9 @@ const UserPlace = (props) => {
       {props.user ? (
         <>
           <div>
-            <h4>{props.user.username} places.</h4>
+            <h4 className="heading">
+              <em>{props.user.username}</em> places.
+            </h4>
           </div>
           <Places places={props.user.places} />
         </>

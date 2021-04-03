@@ -5,7 +5,8 @@ const notificationsSchema = new mongoose.Schema({
   action: String,
   new: Boolean,
   placeOwnerId: String,
-  date: { type: Date, default: Date.now() },
+  date: { type: String, required: true },
+  placeId: { type: String, requierd: true },
 });
 
 module.exports = mongoose.model("Notifications", notificationsSchema);

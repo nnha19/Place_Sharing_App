@@ -146,6 +146,7 @@ const Rate = (props) => {
           username: authContext.userData.username,
           action: " rated your place.",
           new: true,
+          placeId,
         },
         {
           headers: {
