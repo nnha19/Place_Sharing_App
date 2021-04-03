@@ -4,7 +4,7 @@ import axios from "axios";
 import LoadingSpinner from "../../share/UI/LoadingSpinner/LoadingSpinner";
 
 const PlacesPage = (props) => {
-  const [places, setPlaces] = useState();
+  const [places, setPlaces] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -32,7 +32,7 @@ const PlacesPage = (props) => {
   return (
     <div>
       <LoadingSpinner showSpinner={isLoading} />
-      <Places places={places} />
+      <Places isLoading={isLoading} places={places} />
     </div>
   );
 };

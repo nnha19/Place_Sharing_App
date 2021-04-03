@@ -347,7 +347,7 @@ const ShowPlace = (props) => {
     }
   };
 
-  return (
+  return showPlace && !isLoading ? (
     <>
       <BackDrop
         clicked={() => cancelDeleteHandler()}
@@ -455,6 +455,10 @@ const ShowPlace = (props) => {
         </div>
       </div>
     </>
+  ) : (
+    <p className="error-message">
+      This place doesn't exist.May be it was deleted by the creator.
+    </p>
   );
 };
 

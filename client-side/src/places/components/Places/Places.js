@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "../../../share/UI/Button/Button";
 const Places = (props) => {
   let places;
-  if (props.places && props.places.length > 0) {
+  if (props.places.length > 0) {
     places = props.places.map((p) => {
       return (
         <div className="place">
@@ -38,7 +38,7 @@ const Places = (props) => {
         </div>
       );
     });
-  } else {
+  } else if (props.places.length === 0 && !props.isLoading) {
     places = <p className="error-message">!No places to show.</p>;
   }
 
