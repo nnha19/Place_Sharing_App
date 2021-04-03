@@ -12,8 +12,10 @@ import BackDrop from "../../../share/UI/BackDrop/BackDrop";
 import EditComment from "./EditComment/EditComment";
 import Ratings from "./Rating/Rating";
 import moment from "moment";
+import useCreateNotification from "../../../customHooks/useCreateNotification";
 
 const ShowPlace = (props) => {
+  const [createNoti] = useCreateNotification();
   const authContext = useContext(AuthContext);
   const placeId = useParams().id;
   const history = useHistory();
@@ -42,7 +44,7 @@ const ShowPlace = (props) => {
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [placeId]);
 
   const addCommentHandler = async (text) => {
     try {
@@ -73,20 +75,11 @@ const ShowPlace = (props) => {
         }
       );
       if (authContext.userData.userId !== showPlace.creator.author) {
-        const userNotiResp = await axios.post(
-          `${process.env.REACT_APP_BACKEND_URL}/user/${showPlace.creator.author}/notifications`,
-          {
-            username: authContext.userData.username,
-            action: " commented on your place",
-            placeId: showPlace._id,
-          },
-          {
-            headers: {
-              Authorization: authContext.token,
-            },
-          }
+        createNoti(
+          showPlace.creator.author,
+          " commented on your place",
+          showPlace._id
         );
-        authContext.updateUser(userNotiResp.data, showPlace.creator.author);
       }
       setShowPlace(resp.data);
       setAddCommentLoading(false);
@@ -133,27 +126,14 @@ const ShowPlace = (props) => {
       }
     );
     if (authContext.userData.userId !== showPlace.creator.author) {
-      const userNotiResp = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/user/${showPlace.creator.author}/notifications`,
-        {
-          username: authContext.userData.username,
-          action: " likes the place",
-          placeId: showPlace._id,
-        },
-        {
-          headers: {
-            Authorization: authContext.token,
-          },
-        }
-      );
-      authContext.updateUser(userNotiResp.data, showPlace.creator.author);
+      createNoti(showPlace.creator.author, " liked your place.", showPlace._id);
+      const placeWithLikes = {
+        ...showPlace,
+        likes: resp.data.placeWithLikes.likes,
+      };
+      setShowPlace(placeWithLikes);
+      setLikeIsLoading(false);
     }
-    const placeWithLikes = {
-      ...showPlace,
-      likes: resp.data.placeWithLikes.likes,
-    };
-    setShowPlace(placeWithLikes);
-    setLikeIsLoading(false);
   };
 
   let likeBtnCls = `like__btn`,

@@ -2,14 +2,16 @@ import React, { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Modal from "../../../../../share/UI/Model/Model";
 import Button from "../../../../../share/UI/Button/Button";
-import BackDrop from "../../../../../share/UI/BackDrop/BackDrop";
 import Spinner from "../../../../../share/UI/LoadingSpinner/LoadingSpinner";
 import AuthContext from "../../../../../context/authContext";
 import axios from "axios";
+import useCreateNotification from "../../../../../customHooks/useCreateNotification";
 import "./Rate.css";
 const Rate = (props) => {
   const placeId = useParams().id;
   const authContext = useContext(AuthContext);
+
+  const [createNoti] = useCreateNotification("");
 
   const [starCount, setStarCount] = useState("");
   const [review, setReview] = useState("");
@@ -140,21 +142,7 @@ const Rate = (props) => {
       setLoading(false);
       setStarCount(0);
       setReview("");
-      const notiResp = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/user/${props.placeOwnerId}/notifications`,
-        {
-          username: authContext.userData.username,
-          action: " rated your place.",
-          new: true,
-          placeId,
-        },
-        {
-          headers: {
-            Authorization: authContext.token,
-          },
-        }
-      );
-      authContext.updateUser(notiResp.data, props.placeOwnerId);
+      createNoti(props.placeOwnerId, " rated your place.", props.placeId);
     } catch (err) {
       setLoading(false);
     }
