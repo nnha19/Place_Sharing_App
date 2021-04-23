@@ -3,11 +3,12 @@ import Button from "../../UI/Button/Button";
 import "./ImageUpload.css";
 
 const ImageUpload = (props) => {
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState(props.image && props.image);
   const [imgPreview, setImgPreview] = useState();
   
   const imgPickedHandler = (e) => {
     const pickedImg = e.target.files;
+    console.log(e.target.files)
     if (pickedImg && pickedImg.length === 1) {
       setFile(pickedImg[0]);
       props.inputValues(pickedImg[0], true, props.id);
@@ -26,10 +27,11 @@ const ImageUpload = (props) => {
     }
   }, [file]);
 
+
   return (
     <div className="img-upload">
       <div className="img-preview">
-        {imgPreview && <img className="img" src={imgPreview} alt="Preview" />}
+         <img className="img" src={imgPreview} alt="Preview" />
       </div>
       <input
         onChange={imgPickedHandler}

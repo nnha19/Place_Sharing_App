@@ -54,8 +54,6 @@ const CreatePlace = (props) => {
       formData.append("image", inputValues.image.value);
       formData.append("username", authContext.userData.username);
       formData.append("author", authContext.userData.userId);
-
-
       const resp = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/place`,
         formData,
@@ -65,8 +63,8 @@ const CreatePlace = (props) => {
           },
         }
       );
-      const newPlace = resp.data;
       history.push("/");
+      const newPlace = resp.data;
     } catch (err) {
       setError(err);
       console.log(err);

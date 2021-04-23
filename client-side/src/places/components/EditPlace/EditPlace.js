@@ -103,13 +103,13 @@ const EditPlace = (props) => {
         }
       );
       const newPlace = resp.data;
-      console.log(newPlace);
       history.push("/");
     } catch (err) {
       setError(err);
       console.log(err);
     }
   };
+  console.log(inputValues)
 
   return (
     <>
@@ -130,8 +130,8 @@ const EditPlace = (props) => {
           />
          <ImageUpload 
             id="image" inputValues={(value, isValid, id) =>
-            inputValuesHandler(value, isValid, id)
-          }  />
+            inputValuesHandler(value, isValid, id)}
+            />
           <Input
             element="textarea"
             label="Description"

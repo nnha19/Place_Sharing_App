@@ -48,13 +48,13 @@ const getPlaceById = async (req, res, next) => {
 
 const createPlace = async (req, res, next) => {
   try {
-    console.log(req.file);
     const error = validationResult(req);
     if (!error.isEmpty()) {
       res
         .status(500)
         .json("Invalid input fileds.Make sure all the fileds are filled out.");
     }
+    console.log(error)
     const { title, description, username,author } = req.body;
     const image =req.file.path
 
@@ -80,10 +80,11 @@ const createPlace = async (req, res, next) => {
 };
 
 const updatePlace = async (req, res, next) => {
+  console.log(req.body)
   try {
-    console.log(req.body)
     const error = validationResult(req);
     if (!error.isEmpty()) {
+      console.log(error)
       res
         .status(500)
         .json("Invalid input fileds.Make sure all the fileds are filled out.");

@@ -10,7 +10,6 @@ const storage =multer.diskStorage({
         cb(null, './imgs')
       },
     filename: function (req, file, cb) {
-      console.log(file)
       cb(null, file.fieldname + '-' + Date.now() + fileExtention[file.mimetype])
       }
 })

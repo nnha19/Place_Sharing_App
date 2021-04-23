@@ -1,15 +1,11 @@
 .login-container {
   width: 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin-top:3rem;
+  margin-top:6rem;
 }
 .login {
   background: rgba(192, 192, 192, 0.274);
   width: 60%;
-  margin: 2rem auto;
+  margin: 6rem auto;
   min-height: 30vh;
   padding: 2rem 1rem;
   position: relative;

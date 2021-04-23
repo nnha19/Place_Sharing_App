@@ -68,7 +68,7 @@ const Input = (props) => {
         value={
           props.editValues ? props.editValues[props.id].value : enteredVal.value
         }
-        className={`input ${props.className}`}
+        className={`input textarea ${props.className}`}
       ></textarea>
     );
   } else if (props.element === "fileUpload") {

@@ -7,12 +7,12 @@ router.get("/", userController.getAllUsers);
 router.get("/:uid", userController.getUserById);
 router.post(
   "/signup",
+  upload.single("image"),
   [
     check("username").not().isEmpty(),
     check("password").isLength({ min: "5" }),
     check("email").isEmail(),
   ],
-  upload.single("image"),
   userController.createUser
 );
 router.post("/login", userController.loginUser);

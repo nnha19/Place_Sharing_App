@@ -11,22 +11,20 @@ router.get("/:id", placesController.getPlaceById);
 router.use(authMiddleWare);
 
 router.post(
-  "/",
+  "/", upload.single("image"),
   [
     check("title").not().isEmpty(),
     check("description").isLength({ min: 5 }),
-    check("image").not().isEmpty(),
   ],
-  upload.single("image"),
   placesController.createPlace
 );
 
 router.put(
-  "/:id",
-  check("title").not().isEmpty(),
-  check("description").isLength({ min: 5 }),
-  check("image").not().isEmpty(),
-  upload.single("image"),
+  "/:id", upload.single("image"),
+  [
+    check("title").not().isEmpty(),
+    check("description").isLength({ min: 5 }),
+  ],
   placesController.updatePlace
 );
 
