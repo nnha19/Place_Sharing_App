@@ -266,7 +266,7 @@ const ShowPlace = (props) => {
     console.log(resp);
   };
 
-  if (showPlace) {
+  if (showPlace && !isLoading) {
     comments = showPlace.comments.map((c) => {
       return (
         <div className="comment">
@@ -348,119 +348,123 @@ const ShowPlace = (props) => {
     }
   };
 
-  return showPlace && !isLoading ? (
+  return (
     <>
-      <BackDrop
-        clicked={() => cancelDeleteHandler()}
-        showBackDrop={deleteWarning}
-      />
-      <Model
-        showModel={deleteWarning}
-        header="Warning for deletion?"
-        content="This action can't be undone.Are you sure you want to delete thisThis action can't be undone.Are you sure you want to delete this?"
-        footer={
-          <div className="model__btn-container">
-            <Button clicked={deleteHandler} className="model__delete">
-              Continue
-            </Button>
-            <Button clicked={cancelDeleteHandler} className="model__cancel">
-              Cancel
-            </Button>
-          </div>
-        }
-      />
-      <LoadingSpinner showSpinner={isLoading} />
-      <div onClick={cancelEditingHandler} className="showplace-container">
-        <div className="show">
-          {showPlace && (
-            <>
-              <div className="show__place">
-                <img
-                  className="show__img"
-                  src={`http://localhost:5000/${showPlace.image}`}
-                  alt={showPlace.name}
-                />
-                <div className="show__btns">
-                  {authContext.authenticated &&
-                    authContext.userData.userId ===
-                      showPlace.creator.author && (
-                      <Link to={`/place/${placeId}/update`}>
-                        <Button className="show__edit">Edit</Button>
+    <LoadingSpinner showSpinner={isLoading} />
+    {showPlace && !isLoading ? (
+      <>
+        <BackDrop
+          clicked={() => cancelDeleteHandler()}
+          showBackDrop={deleteWarning}
+        />
+        <Model
+          showModel={deleteWarning}
+          header="Warning for deletion?"
+          content="This action can't be undone.Are you sure you want to delete thisThis action can't be undone.Are you sure you want to delete this?"
+          footer={
+            <div className="model__btn-container">
+              <Button clicked={deleteHandler} className="model__delete">
+                Continue
+              </Button>
+              <Button clicked={cancelDeleteHandler} className="model__cancel">
+                Cancel
+              </Button>
+            </div>
+          }
+        />
+        <div onClick={cancelEditingHandler} className="showplace-container">
+          <div className="show">
+            {showPlace && (
+              <>
+                <div className="show__place">
+                  <img
+                    className="show__img"
+                    src={`http://localhost:5000/${showPlace.image}`}
+                    alt={showPlace.name}
+                  />
+                  <div className="show__btns">
+                    {authContext.authenticated &&
+                      authContext.userData.userId ===
+                        showPlace.creator.author && (
+                        <Link to={`/place/${placeId}/update`}>
+                          <Button className="show__edit">Edit</Button>
+                        </Link>
+                      )}
+                    {authContext.authenticated &&
+                      authContext.userData.userId ===
+                        showPlace.creator.author && (
+                        <Button
+                          clicked={deleteWarningHandler}
+                          className="show__delete"
+                        >
+                          Delete
+                        </Button>
+                      )}
+                    <Ratings
+                      placeOwnerId={showPlace.creator.author}
+                      placeId={showPlace._id}
+                    />
+                  </div>
+                  <p className="creator">
+                    Uploaded by
+                    <em>
+                      <Link to={`/place/user/${showPlace.creator.author}`}>
+                        <strong>{showPlace.creator.username}</strong>
                       </Link>
-                    )}
-                  {authContext.authenticated &&
-                    authContext.userData.userId ===
-                      showPlace.creator.author && (
+                    </em>
+                  </p>
+                  <div className="like">
+                    <p className="like__counts">{showPlace.likes.length} likes</p>
+                    {authContext.authenticated && (
                       <Button
-                        clicked={deleteWarningHandler}
-                        className="show__delete"
+                        style={{ position: "relative" }}
+                        clicked={likedHandler}
+                        className={likeBtnCls}
                       >
-                        Delete
+                        {likeIsLoading ? (
+                          <span className="text-loading"></span>
+                        ) : (
+                          likeText
+                        )}
                       </Button>
                     )}
-                  <Ratings
-                    placeOwnerId={showPlace.creator.author}
-                    placeId={showPlace._id}
-                  />
+                    <p className="like__date">
+                      {moment(showPlace.date).fromNow()}
+                    </p>
+                  </div>
                 </div>
-                <p className="creator">
-                  Uploaded by
-                  <em>
-                    <Link to={`/place/user/${showPlace.creator.author}`}>
-                      <strong>{showPlace.creator.username}</strong>
-                    </Link>
-                  </em>
-                </p>
-                <div className="like">
-                  <p className="like__counts">{showPlace.likes.length} likes</p>
-                  {authContext.authenticated && (
-                    <Button
-                      style={{ position: "relative" }}
-                      clicked={likedHandler}
-                      className={likeBtnCls}
-                    >
-                      {likeIsLoading ? (
-                        <span className="text-loading"></span>
-                      ) : (
-                        likeText
-                      )}
-                    </Button>
-                  )}
-                  <p className="like__date">
-                    {moment(showPlace.date).fromNow()}
-                  </p>
+                <div className="show__infos">
+                  <h4 className="show__title">{showPlace.title}</h4>
+                  <p className="show__description">{showPlace.description}</p>
                 </div>
-              </div>
-              <div className="show__infos">
-                <h4 className="show__title">{showPlace.title}</h4>
-                <p className="show__description">{showPlace.description}</p>
-              </div>
-            </>
-          )}
-        </div>
-        <div className="comments-container">
-          {authContext.authenticated ? (
-            <Comment
-              formCls="add-comment"
-              btnCls="comment-btn"
-              textareaCls="comment-input"
-              addComment={(comment) => addCommentHandler(comment)}
-              addCommentLoading={addCommentLoading}
-            />
-          ) : (
-            <p>Sign in to discuss with other users.</p>
-          )}
-          <div className="show__comments">
-            <div className="comments">{comments}</div>
+              </>
+            )}
+          </div>
+          <div className="comments-container">
+            {authContext.authenticated ? (
+              <Comment
+                formCls="add-comment"
+                btnCls="comment-btn"
+                textareaCls="comment-input"
+                addComment={(comment) => addCommentHandler(comment)}
+                addCommentLoading={addCommentLoading}
+              />
+            ) : (
+              <p>Sign in to discuss with other users.</p>
+            )}
+            <div className="show__comments">
+              <div className="comments">{comments}</div>
+            </div>
           </div>
         </div>
-      </div>
-    </>
-  ) : (
-    <p className="error-message">
-      This place doesn't exist.May be it was deleted by the creator.
-    </p>
-  );
+      </>
+    ) : (
+     !isLoading && <p className="error-message">
+        This place doesn't exist.May be it was deleted by the creator.
+      </p>
+    )  }
+    </>  )
+  
 };
 
 export default ShowPlace;
