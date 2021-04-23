@@ -36,7 +36,6 @@ const App = () => {
     }
   }, [users, userData.userId]);
 
-  console.log(curUser);
 
   const updateUserNotiHandler = (notification, notiOwnerId) => {
     const notiOwner = users.find((u) => u._id === notiOwnerId);

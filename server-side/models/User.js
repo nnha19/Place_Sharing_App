@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
     { type: mongoose.Schema.Types.ObjectId, ref: "Notifications" },
   ],
   places: [{ type: mongoose.Schema.Types.ObjectId, ref: "Place" }],
+  image :String
 });
 
 module.exports = mongoose.model("User", userSchema);

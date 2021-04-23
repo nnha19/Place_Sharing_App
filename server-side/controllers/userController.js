@@ -37,6 +37,7 @@ const createUser = async (req, res, next) => {
     if (!error.isEmpty()) {
       res.status(500).json("Invalid Input fields.Try again.");
     } else {
+      console.log(req.file)
       const { username, email, password } = req.body;
       const user = await User.findOne({ email: email });
       if (user) {
@@ -49,6 +50,7 @@ const createUser = async (req, res, next) => {
           username,
           email,
           password: hashedPassword,
+          image :req.file.path
         });
         try {
           const token = await jwt.sign(

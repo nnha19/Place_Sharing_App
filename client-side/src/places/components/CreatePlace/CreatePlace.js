@@ -57,14 +57,16 @@ const CreatePlace = (props) => {
       };
 
       const formData = new FormData();
-      // formData.append("title", inputValues.title.value);
-      // formData.append("description", inputValues.description.value);
-      // formData.append("image", inputValues.image.value);
-      // formData.append("username", authContext.userData.username);
-      // formData.append("author", authContext.userData.userId);
+      formData.append("title", inputValues.title.value);
+      formData.append("description", inputValues.description.value);
+      formData.append("image", inputValues.image.value);
+      formData.append("username", authContext.userData.username);
+      formData.append("author", authContext.userData.userId);
+
+
       const resp = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/place`,
-        place,
+        formData,
         {
           headers: {
             Authorization: authContext.token,
@@ -78,6 +80,8 @@ const CreatePlace = (props) => {
       console.log(err);
     }
   };
+
+  console.log(inputValues.image.value)
 
   return (
     <div className="login">
@@ -93,17 +97,10 @@ const CreatePlace = (props) => {
             inputValuesHandler(value, isValid, id)
           }
         />
-        <Input
-          element="input"
-          id="image"
-          type="text"
-          label="image"
-          validRules={{ type: "REQUIRE" }}
-          invalidText="Choose an image."
-          inputValues={(value, isValid, id) =>
+        <ImageUpload 
+            id="image" inputValues={(value, isValid, id) =>
             inputValuesHandler(value, isValid, id)
-          }
-        />
+          }  />
         <Input
           element="textarea"
           label="Description"
@@ -116,12 +113,6 @@ const CreatePlace = (props) => {
           rows="4"
           cols="40"
         />
-        {/* <ImageUpload
-          id="image"
-          inputValues={(value, isValid, id) =>
-            inputValuesHandler(value, isValid, id)
-          }
-        /> */}
         <Button disabled={!allValid} className="form__btn">
           Submit
         </Button>

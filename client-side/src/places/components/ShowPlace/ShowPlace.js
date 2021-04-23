@@ -36,7 +36,6 @@ const ShowPlace = (props) => {
           `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}`
         );
         const place = resp.data;
-
         setIsLoading(false);
         setShowPlace(place);
       } catch (err) {
@@ -45,6 +44,8 @@ const ShowPlace = (props) => {
       }
     })();
   }, [placeId]);
+
+  console.log(showPlace)
 
   const addCommentHandler = async (text) => {
     try {
@@ -376,7 +377,7 @@ const ShowPlace = (props) => {
               <div className="show__place">
                 <img
                   className="show__img"
-                  src={showPlace.image}
+                  src={`http://localhost:5000/${showPlace.image}`}
                   alt={showPlace.name}
                 />
                 <div className="show__btns">

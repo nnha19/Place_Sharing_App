@@ -12,6 +12,7 @@ const NavItemUser = (props) => {
   const authContext = useContext(AuthContext);
   const notiContext = useContext(AuthContext).noti;
   const { curUser } = notiContext;
+  console.log(curUser)
   useEffect(() => {
     if (reverseNoti) {
       const firstNoti = reverseNoti.slice(0, 10);
@@ -109,10 +110,10 @@ const NavItemUser = (props) => {
           {showMoreNoti}
         </div>
         <div onClick={goToProfileHandler} className="user__infos">
-          {curUser.profileImg ? (
+          {curUser.image ? (
             <img
               className="user__profile"
-              src={curUser.profileImg}
+              src={`http://localhost:5000/${curUser.image}`}
               alt="profile-picture"
             />
           ) : (

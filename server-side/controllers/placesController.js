@@ -55,19 +55,19 @@ const createPlace = async (req, res, next) => {
         .status(500)
         .json("Invalid input fileds.Make sure all the fileds are filled out.");
     }
-    const { title, description, creator, image } = req.body;
-    // const image =req.file
+    const { title, description, username,author } = req.body;
+    const image =req.file.path
 
     const createdPlace = await Place.create({
       title,
       description,
       image,
-      creator,
+      creator :{username,author},
       rating: [],
       date: new Date(),
     });
 
-    const user = await User.findById(creator.author);
+    const user = await User.findById(author);
     user.places.push(createdPlace);
     await user.save();
     console.log(user);
@@ -97,8 +97,7 @@ const updatePlace = async (req, res, next) => {
         title,
         description,
         image,
-        author,
-        username,
+       creator :{author,username},
         date,
       });
       res.status(201).json(updatedPlace);

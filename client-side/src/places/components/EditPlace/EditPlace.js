@@ -5,6 +5,9 @@ import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../../context/authContext";
 import LoadingSpinner from "../../../share/UI/LoadingSpinner/LoadingSpinner";
+import ImageUpload from "../../../share/components/ImageUpload/ImageUpload"
+
+
 const EditPlace = (props) => {
   const placeId = useParams().id;
   const history = useHistory();
@@ -75,22 +78,21 @@ const EditPlace = (props) => {
       }
     })();
   }, []);
+
+
   const editingPlaceHandler = async (e) => {
     e.preventDefault();
     try {
-      const place = {
-        title: inputValues.title.value,
-        description: inputValues.description.value,
-        image: inputValues.image.value,
-        creator: {
-          username: authContext.userData.username,
-          author: authContext.userData.userId,
-        },
-        date: new Date().toDateString(),
-      };
+      const formData = new FormData();
+      formData.append("title", inputValues.title.value);
+      formData.append("description", inputValues.description.value);
+      formData.append("image", inputValues.image.value);
+      formData.append("username", authContext.userData.username);
+      formData.append("author", authContext.userData.userId);
+
       const resp = await axios.put(
         `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}`,
-        place,
+        formData,
         {
           headers: {
             Authorization: authContext.token,
@@ -124,18 +126,10 @@ const EditPlace = (props) => {
             }
             editValues={inputValues}
           />
-          <Input
-            element="input"
-            type="text"
-            label="Image"
-            id="image"
-            validRules={{ type: "REQUIRE" }}
-            invalidText="This field can't be empty!"
-            inputValues={(value, isValid, id) =>
-              inputValuesHandler(value, isValid, id)
-            }
-            editValues={inputValues}
-          />
+         <ImageUpload 
+            id="image" inputValues={(value, isValid, id) =>
+            inputValuesHandler(value, isValid, id)
+          }  />
           <Input
             element="textarea"
             label="Description"

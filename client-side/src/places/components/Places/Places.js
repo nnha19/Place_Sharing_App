@@ -8,7 +8,7 @@ const Places = (props) => {
     places = props.places.map((p) => {
       return (
         <div className="place">
-          <img className="place__img" src={p.image} alt={p.title} />
+          <img className="place__img" src={`http://localhost:5000/${p.image}`} alt={p.title} />
           <h3 className="place__title">{p.title}</h3>
           <div className="place__infos">
             <p className="place__like">
