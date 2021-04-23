@@ -126,14 +126,14 @@ const ShowPlace = (props) => {
         },
       }
     );
+    const placeWithLikes = {
+      ...showPlace,
+      likes: resp.data.placeWithLikes.likes,
+    };
+    setShowPlace(placeWithLikes);
+    setLikeIsLoading(false);
     if (authContext.userData.userId !== showPlace.creator.author) {
       createNoti(showPlace.creator.author, " liked your place.", showPlace._id);
-      const placeWithLikes = {
-        ...showPlace,
-        likes: resp.data.placeWithLikes.likes,
-      };
-      setShowPlace(placeWithLikes);
-      setLikeIsLoading(false);
     }
   };
 
