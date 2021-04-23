@@ -5,6 +5,7 @@ import "./ImageUpload.css";
 const ImageUpload = (props) => {
   const [file, setFile] = useState("");
   const [imgPreview, setImgPreview] = useState();
+  
   const imgPickedHandler = (e) => {
     const pickedImg = e.target.files;
     if (pickedImg && pickedImg.length === 1) {

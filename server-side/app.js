@@ -14,17 +14,13 @@ app.use(express.json());
 app.locals.moment = require("moment");
 require("dotenv").config();
 
-console.log(process.env.DB_NAME);
-console.log(process.env.DB_USER);
-console.log(process.env.DB_PASSWORD);
-
 app.use(cors());
 mongoose
   .connect(
-    `mongodb+srv://webtek:${process.env.DB_PASSWORD}@cluster0.yrg2a.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.pkqmd.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
-      useUnifiedTopology: false,
+      useUnifiedTopology: true,
     }
   )
   .then((res) => console.log("connected"))

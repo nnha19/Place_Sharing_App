@@ -29,19 +29,21 @@ const SignUp = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const authContext = useContext(AuthContext);
 
+
   const signUpHandler = async (e) => {
     e.preventDefault();
-    const { username, email, password } = userInfos;
-    const data = {
-      username: username.value,
-      email: email.value,
-      password: password.value,
-    };
+    const { username, email, password,image } = userInfos;
+     const formData =new FormData()
+     formData.append("username",username.value)
+     formData.append("email",email.value)
+     formData.append("password",password.value)
+     formData.append("image",image.value)
+ 
     try {
       setIsLoading(true);
       const resp = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/user/signup`,
-        data
+        formData
       );
       console.log(resp);
       authContext.login(resp.data.userData);
@@ -55,7 +57,6 @@ const SignUp = (props) => {
       console.log(err);
     }
   };
-
   const inputValuesHandler = (value, isValid, id) => {
     const newValue = { ...userInfos[id] };
     newValue.value = value;
@@ -119,7 +120,12 @@ const SignUp = (props) => {
                 inputValuesHandler(value, isValid, id)
               }
             />
-            <ImageUpload />
+            <ImageUpload  inputValues={(value, isValid, id) =>
+                inputValuesHandler(value, isValid, id)
+               
+              } 
+              id ="image" 
+              />
             <Button disabled={!isAllValid} className="form__btn">
               Submit
             </Button>
