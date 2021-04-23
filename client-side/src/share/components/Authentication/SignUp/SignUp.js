@@ -23,6 +23,10 @@ const SignUp = (props) => {
       value: "",
       isValid: false,
     },
+    image :{
+      value :"",
+      isValid :false
+    }
   });
   const [isAllValid, setIsAllValid] = useState(false);
   const [error, setError] = useState(null);

@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../../context/authContext";
 import ImageUpload from "../../../share/components/ImageUpload/ImageUpload";
+
 import moment from "moment";
 const CreatePlace = (props) => {
   const history = useHistory();
@@ -46,17 +47,8 @@ const CreatePlace = (props) => {
   const creatingPlaceHandler = async (e) => {
     e.preventDefault();
     try {
-      const place = {
-        title: inputValues.title.value,
-        description: inputValues.description.value,
-        image: inputValues.image.value,
-        creator: {
-          username: authContext.userData.username,
-          author: authContext.userData.userId,
-        },
-      };
-
       const formData = new FormData();
+
       formData.append("title", inputValues.title.value);
       formData.append("description", inputValues.description.value);
       formData.append("image", inputValues.image.value);

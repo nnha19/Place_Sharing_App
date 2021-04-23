@@ -5,7 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../../context/authContext";
 import LoadingSpinner from "../../../share/UI/LoadingSpinner/LoadingSpinner";
-import ImageUpload from "../../../share/components/ImageUpload/ImageUpload"
+import ImageUpload from "../../../share/components/ImageUpload/ImageUpload";
 
 
 const EditPlace = (props) => {
@@ -79,16 +79,18 @@ const EditPlace = (props) => {
     })();
   }, []);
 
-
+  
   const editingPlaceHandler = async (e) => {
     e.preventDefault();
     try {
       const formData = new FormData();
+      
       formData.append("title", inputValues.title.value);
       formData.append("description", inputValues.description.value);
       formData.append("image", inputValues.image.value);
       formData.append("username", authContext.userData.username);
       formData.append("author", authContext.userData.userId);
+      formData.append("date", new Date().toDateString(),);
 
       const resp = await axios.put(
         `${process.env.REACT_APP_BACKEND_URL}/place/${placeId}`,

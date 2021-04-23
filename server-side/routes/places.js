@@ -12,11 +12,11 @@ router.use(authMiddleWare);
 
 router.post(
   "/",
-  // [
-  //   check("title").not().isEmpty(),
-  //   check("description").isLength({ min: 5 }),
-  //   check("image").not().isEmpty(),
-  // ],
+  [
+    check("title").not().isEmpty(),
+    check("description").isLength({ min: 5 }),
+    check("image").not().isEmpty(),
+  ],
   upload.single("image"),
   placesController.createPlace
 );
@@ -26,6 +26,7 @@ router.put(
   check("title").not().isEmpty(),
   check("description").isLength({ min: 5 }),
   check("image").not().isEmpty(),
+  upload.single("image"),
   placesController.updatePlace
 );
 

@@ -81,6 +81,7 @@ const createPlace = async (req, res, next) => {
 
 const updatePlace = async (req, res, next) => {
   try {
+    console.log(req.body)
     const error = validationResult(req);
     if (!error.isEmpty()) {
       res
@@ -88,10 +89,10 @@ const updatePlace = async (req, res, next) => {
         .json("Invalid input fileds.Make sure all the fileds are filled out.");
     }
     const placeId = req.params.id;
-    const { title, description, image, username, author, date } = req.body;
+    const { title, description, username, author, date } = req.body;
+    const image =req.file.path
     const place = await Place.findById(placeId);
-    console.log(`place creator id is ${place.creator.author}`);
-    console.log(`current user id is ${req.userId}`);
+
     if (place.creator.author.toString() === req.userId) {
       const updatedPlace = await Place.findByIdAndUpdate(placeId, {
         title,
