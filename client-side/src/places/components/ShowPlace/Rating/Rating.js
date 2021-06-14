@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+
 import Button from "../../../../share/UI/Button/Button";
 import BackDrop from "../../../../share/UI/BackDrop/BackDrop";
 import Modal from "../../../../share/UI/Model/Model";
@@ -8,6 +9,7 @@ import AuthContext from "../../../../context/authContext";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import EditRating from "./EditRating/EditRating";
+import UserProfile from "../../ShowPlace/UserProfile/UserProfile";
 
 const Rating = (props) => {
   const placeId = useParams().id;
@@ -111,9 +113,11 @@ const Rating = (props) => {
             <div className="rating__stars">{ratedStars}</div>
             <div className="rating__infos">
               <div className="rating__edit">
-                <h4 className="rating__name">
-                  <strong>{r.author.username}</strong>
-                </h4>
+                <UserProfile
+                  className="rating__profile"
+                  link="true"
+                  userId={r.author.userId}
+                />
                 <EditRating
                   showDropDown={r.editing}
                   showEditDropDown={(id) => showEditDropDownHandler(id)}

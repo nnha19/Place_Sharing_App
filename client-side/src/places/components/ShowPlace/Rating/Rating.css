@@ -95,6 +95,10 @@
   justify-content: space-between;
 }
 
+.rating__profile {
+  margin-bottom: 0.4rem;
+}
+
 @media (max-width: 1100px) {
   .rating-modal {
     width: 70vw;

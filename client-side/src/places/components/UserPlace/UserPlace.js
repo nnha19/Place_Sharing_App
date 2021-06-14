@@ -12,7 +12,7 @@ const UserPlace = (props) => {
         <>
           <div className="user-place">
             <UserProfile userId={props.user._id} />
-            <span>Places</span>
+            <span> &nbsp; Places</span>
           </div>
           <Places places={props.user.places} />
         </>
