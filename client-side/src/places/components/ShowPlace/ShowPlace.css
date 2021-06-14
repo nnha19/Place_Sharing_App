@@ -90,11 +90,15 @@
 .comment__text {
   margin-top: 0.6rem;
   flex: 1;
+  margin-bottom: 0.4rem;
 }
+.comment__date {
+  align-self: flex-end;
+}
+
 .comment__body {
-  align-items: flex-end;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
 }
 .comment-btn {
   background: purple;
