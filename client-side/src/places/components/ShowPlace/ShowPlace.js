@@ -406,7 +406,10 @@ const ShowPlace = (props) => {
                     </div>
                     <p className="creator">
                       Uploaded by
-                      <UserProfile userId={showPlace.creator.author} />
+                      <UserProfile
+                        link="true"
+                        userId={showPlace.creator.author}
+                      />
                     </p>
                     <div className="like">
                       <p className="like__counts">

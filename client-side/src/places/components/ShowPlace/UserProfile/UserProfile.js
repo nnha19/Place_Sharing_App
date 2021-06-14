@@ -14,11 +14,9 @@ const UserProfile = (props) => {
       return user._id === props.userId;
     });
 
-  console.log(creator);
-
   return creator ? (
-    <Link to={`/place/user/${creator._id}`}>
-      <div className="show__uploader">
+    <Link to={`${props.link ? `/place/user/${creator._id}` : "#"}`}>
+      <div className={`show__uploader ${props.className}`}>
         <img
           className="user__profile"
           src={`${process.env.REACT_APP_BACKEND_URL}/${creator.image}`}

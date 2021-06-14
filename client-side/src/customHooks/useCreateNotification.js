@@ -10,6 +10,7 @@ const useCreateNotification = (init) => {
       `${process.env.REACT_APP_BACKEND_URL}/user/${author}/notifications`,
       {
         username: authContext.userData.username,
+        userId: authContext.userData.userId,
         action,
         placeId,
       },

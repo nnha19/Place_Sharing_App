@@ -6,12 +6,12 @@ const commentsRoute = require("./routes/comments");
 const likesRoute = require("./routes/likes");
 const userNotificationsRoute = require("./routes/user-notifications");
 const reviewRoute = require("./routes/rating");
-const path =require("path")
+const path = require("path");
 
 const cors = require("cors");
 const app = express();
 app.use(express.json());
-app.use("/imgs",express.static(path.join("imgs")))
+app.use("/imgs", express.static(path.join("imgs")));
 
 app.locals.moment = require("moment");
 require("dotenv").config();
@@ -19,7 +19,7 @@ require("dotenv").config();
 app.use(cors());
 mongoose
   .connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.pkqmd.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
+    `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-shard-00-00.yrg2a.mongodb.net:27017,cluster0-shard-00-01.yrg2a.mongodb.net:27017,cluster0-shard-00-02.yrg2a.mongodb.net:27017/${process.env.DB_NAME}?ssl=true&replicaSet=atlas-90vt8b-shard-0&authSource=admin&retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

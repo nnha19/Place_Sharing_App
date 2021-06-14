@@ -1,8 +1,12 @@
-import React, { useState, useContext, useEffect, useCallback } from "react";
-import { useHistory } from "react-router-dom";
-import "./NavItemUser.css";
-import AuthContext from "../../../../../../context/authContext";
+import React, { useState, useContext, useEffect } from "react";
+
 import moment from "moment";
+import "./NavItemUser.css";
+
+import { useHistory } from "react-router-dom";
+
+import AuthContext from "../../../../../../context/authContext";
+import UserProfile from "../../../../../../places/components/ShowPlace/UserProfile/UserProfile";
 
 const NavItemUser = (props) => {
   const [showNoti, setShowNoti] = useState([]);
@@ -40,15 +44,16 @@ const NavItemUser = (props) => {
   notiOutPut =
     showNoti &&
     showNoti.map((notis) => {
+      console.log(notis);
       return (
-        <p
+        <div
           onClick={() => navigateToPlaceHandler(notis.placeId)}
           className="noti"
         >
-          <strong>{notis.username}</strong>
-          <span>{notis.action}</span>
+          <UserProfile className="noti__user-profile" userId={notis.userId} />
+          <span className="noti__action">{notis.action}</span>
           <p className="noti__date">{moment(notis.date).fromNow()}</p>
-        </p>
+        </div>
       );
     });
 
