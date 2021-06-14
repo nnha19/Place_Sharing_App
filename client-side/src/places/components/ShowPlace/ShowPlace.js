@@ -347,11 +347,6 @@ const ShowPlace = (props) => {
     }
   };
 
-  const placeCreator = (id) => {
-    const creator = authContext.users.find((user) => user._id === id);
-    return creator;
-  };
-
   return (
     <>
       <LoadingSpinner showSpinner={isLoading} />
@@ -411,9 +406,7 @@ const ShowPlace = (props) => {
                     </div>
                     <p className="creator">
                       Uploaded by
-                      <UserProfile
-                        creator={placeCreator(showPlace.creator.author)}
-                      />
+                      <UserProfile userId={showPlace.creator.author} />
                     </p>
                     <div className="like">
                       <p className="like__counts">

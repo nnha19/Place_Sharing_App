@@ -1,26 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Link } from "react-router-dom";
+import AuthContext from "../../../../context/authContext";
 
 import "./UserProfile.css";
 
 const UserProfile = (props) => {
-  return (
-    <Link to={`/place/user/${props.creator.author}`}>
+  const context = useContext(AuthContext);
+
+  const creator =
+    context.users &&
+    context.users.find((user) => {
+      return user._id === props.userId;
+    });
+
+  console.log(creator);
+
+  return creator ? (
+    <Link to={`/place/user/${creator._id}`}>
       <div className="show__uploader">
         <img
           className="user__profile"
-          src={`${process.env.REACT_APP_BACKEND_URL}/${props.creator.image}`}
+          src={`${process.env.REACT_APP_BACKEND_URL}/${creator.image}`}
           alt="Creator Profle"
         />
         <strong>
           <em>
-            <span className="show__user-name">{props.creator.username}</span>
+            <span className="show__user-name">{creator.username}</span>
           </em>
         </strong>
       </div>
     </Link>
-  );
+  ) : null;
 };
 
 export default UserProfile;

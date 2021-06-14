@@ -1,16 +1,14 @@
 import React from "react";
+
 import Places from "../../../places/components/Places/Places";
+import UserProfile from "../ShowPlace/UserProfile/UserProfile";
 
 const UserPlace = (props) => {
   return (
     <>
       {props.user ? (
         <>
-          <div>
-            <h4 className="heading">
-              <em>{props.user.username}</em> places.
-            </h4>
-          </div>
+          {/* <UserProfile creator={} /> */}
           <Places places={props.user.places} />
         </>
       ) : null}
