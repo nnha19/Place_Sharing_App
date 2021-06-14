@@ -293,9 +293,10 @@ const ShowPlace = (props) => {
           ) : (
             <>
               <div className="comment__display">
-                <span className="comment__author">
+                <UserProfile userId={c.author} link="true" />
+                {/* <span className="comment__author">
                   <strong>{c.username}</strong>
-                </span>
+                </span> */}
                 <div
                   onClick={() => commentManiHandler(c._id)}
                   className={
