@@ -1,0 +1,8 @@
+.show__uploader {
+  display: flex;
+  align-items: center;
+  margin: 0 1rem;
+}
+.show__user-name {
+  margin-left: 0.4rem;
+}

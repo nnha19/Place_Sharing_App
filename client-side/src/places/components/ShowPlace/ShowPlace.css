@@ -36,9 +36,11 @@
 }
 
 .creator {
-  text-align: end;
   margin-right: 1rem;
+  display: flex;
   margin-top: 1rem;
+  justify-content: flex-end;
+  align-items: center;
 }
 .creator a {
   text-decoration: none;

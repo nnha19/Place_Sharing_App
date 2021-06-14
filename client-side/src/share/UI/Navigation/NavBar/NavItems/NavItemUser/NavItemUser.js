@@ -12,7 +12,7 @@ const NavItemUser = (props) => {
   const authContext = useContext(AuthContext);
   const notiContext = useContext(AuthContext).noti;
   const { curUser } = notiContext;
-  console.log(curUser)
+
   useEffect(() => {
     if (reverseNoti) {
       const firstNoti = reverseNoti.slice(0, 10);
@@ -113,7 +113,7 @@ const NavItemUser = (props) => {
           {curUser.image ? (
             <img
               className="user__profile"
-              src={`http://localhost:5000/${curUser.image}`}
+              src={`${process.env.REACT_APP_BACKEND_URL}/${curUser.image}`}
               alt="profile-picture"
             />
           ) : (
