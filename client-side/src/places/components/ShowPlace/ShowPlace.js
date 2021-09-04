@@ -379,7 +379,7 @@ const ShowPlace = (props) => {
                   <div className="show__place">
                     <img
                       className="show__img"
-                      src={`http://localhost:5000/${showPlace.image}`}
+                      src={`${process.env.REACT_APP_BACKEND_URL}/${showPlace.image}`}
                       alt={showPlace.name}
                     />
                     <div className="show__btns">

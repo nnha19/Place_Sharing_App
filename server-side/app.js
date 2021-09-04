@@ -13,8 +13,8 @@ const app = express();
 app.use(express.json());
 app.use("/imgs", express.static(path.join("imgs")));
 
-app.locals.moment = require("moment");
 require("dotenv").config();
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 mongoose
@@ -36,6 +36,6 @@ app.use("/place/:id/comments", commentsRoute);
 app.use("/place/:id/likes", likesRoute);
 app.use("/user/:uid/notifications", userNotificationsRoute);
 
-app.listen(5000, function () {
+app.listen(PORT, function () {
   console.log("Server has started.");
 });
