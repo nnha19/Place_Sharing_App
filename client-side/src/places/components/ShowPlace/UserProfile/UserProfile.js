@@ -15,18 +15,24 @@ const UserProfile = (props) => {
     });
 
   return creator ? (
-    <Link to={`${props.link ? `/place/user/${creator._id}` : "#"}`}>
+    <Link
+      className="link"
+      to={`${props.link ? `/place/user/${creator._id}` : "#"}`}
+    >
       <div className={`show__uploader ${props.className}`}>
         <img
           className="user__profile"
           src={`${process.env.REACT_APP_BACKEND_URL}/${creator.image}`}
           alt="Creator Profle"
         />
-        <strong>
-          <em>
-            <span className="show__user-name">{creator.username}</span>
-          </em>
-        </strong>
+        <div className="user-name-text">
+          <strong>
+            <em>
+              <span className="show__user-name">{creator.username}</span>
+            </em>
+          </strong>
+          {props.text}
+        </div>
       </div>
     </Link>
   ) : null;

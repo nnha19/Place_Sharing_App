@@ -50,8 +50,11 @@ const NavItemUser = (props) => {
           onClick={() => navigateToPlaceHandler(notis.placeId)}
           className="noti"
         >
-          <UserProfile className="noti__user-profile" userId={notis.userId} />
-          <span className="noti__action">{notis.action}</span>
+          <UserProfile
+            text={<span className="noti__action">{notis.action}</span>}
+            className="noti__user-profile"
+            userId={notis.userId}
+          />
           <p className="noti__date">{moment(notis.date).fromNow()}</p>
         </div>
       );

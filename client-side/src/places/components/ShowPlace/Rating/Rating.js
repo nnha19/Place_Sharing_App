@@ -114,6 +114,7 @@ const Rating = (props) => {
             <div className="rating__infos">
               <div className="rating__edit">
                 <UserProfile
+                  text={<p className="rating__review">{r.review}</p>}
                   className="rating__profile"
                   link="true"
                   userId={r.author.userId}
@@ -132,7 +133,6 @@ const Rating = (props) => {
                   ratingOwner={authContext.userData.userId === r.author.userId}
                 />
               </div>
-              <p className="rating__review">{r.review}</p>
             </div>
           </div>
         </>

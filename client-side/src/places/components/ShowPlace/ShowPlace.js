@@ -293,7 +293,11 @@ const ShowPlace = (props) => {
           ) : (
             <>
               <div className="comment__display">
-                <UserProfile userId={c.author} link="true" />
+                <UserProfile
+                  text={<span>{c.text}</span>}
+                  userId={c.author}
+                  link="true"
+                />
                 <div
                   onClick={() => commentManiHandler(c._id)}
                   className={
@@ -317,7 +321,6 @@ const ShowPlace = (props) => {
                 />
               </div>
               <div className="comment__body">
-                <span className="comment__text">{c.text}</span>
                 <span className="comment__date">
                   {moment(c.date).fromNow()}
                 </span>

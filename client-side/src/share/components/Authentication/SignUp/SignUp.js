@@ -23,26 +23,25 @@ const SignUp = (props) => {
       value: "",
       isValid: false,
     },
-    image :{
-      value :"",
-      isValid :false
-    }
+    image: {
+      value: "",
+      isValid: false,
+    },
   });
   const [isAllValid, setIsAllValid] = useState(false);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const authContext = useContext(AuthContext);
 
-
   const signUpHandler = async (e) => {
     e.preventDefault();
-    const { username, email, password,image } = userInfos;
-     const formData =new FormData()
-     formData.append("username",username.value)
-     formData.append("email",email.value)
-     formData.append("password",password.value)
-     formData.append("image",image.value)
- 
+    const { username, email, password, image } = userInfos;
+    const formData = new FormData();
+    formData.append("username", username.value);
+    formData.append("email", email.value);
+    formData.append("password", password.value);
+    formData.append("image", image.value);
+
     try {
       setIsLoading(true);
       const resp = await axios.post(
@@ -91,6 +90,12 @@ const SignUp = (props) => {
           <h4 className="login__title">Create an account</h4>
           <form onSubmit={signUpHandler} className="form">
             <ErrorMsg errorMessage={error} />
+            <ImageUpload
+              inputValues={(value, isValid, id) =>
+                inputValuesHandler(value, isValid, id)
+              }
+              id="image"
+            />
             <Input
               element="input"
               type="text"
@@ -124,12 +129,7 @@ const SignUp = (props) => {
                 inputValuesHandler(value, isValid, id)
               }
             />
-            <ImageUpload  inputValues={(value, isValid, id) =>
-                inputValuesHandler(value, isValid, id)
-               
-              } 
-              id ="image" 
-              />
+
             <Button disabled={!isAllValid} className="form__btn">
               Submit
             </Button>
