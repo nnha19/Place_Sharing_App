@@ -22,7 +22,7 @@ const UserProfile = (props) => {
       <div className={`show__uploader ${props.className}`}>
         <img
           className="user__profile"
-          src={`${process.env.REACT_APP_BACKEND_URL}/${creator.image}`}
+          src={`${creator.image}`}
           alt="Creator Profle"
         />
         <div className="user-name-text">

@@ -121,7 +121,7 @@ const NavItemUser = (props) => {
           {curUser.image ? (
             <img
               className="user__profile"
-              src={`${process.env.REACT_APP_BACKEND_URL}/${curUser.image}`}
+              src={`${curUser.image}`}
               alt="profile-picture"
             />
           ) : (

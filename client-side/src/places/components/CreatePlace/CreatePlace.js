@@ -5,8 +5,8 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../../context/authContext";
 import ImageUpload from "../../../share/components/ImageUpload/ImageUpload";
+import LoadingSpinner from "../../../share/UI/LoadingSpinner/LoadingSpinner";
 
-import moment from "moment";
 const CreatePlace = (props) => {
   const history = useHistory();
   const authContext = useContext(AuthContext);
@@ -46,9 +46,9 @@ const CreatePlace = (props) => {
 
   const creatingPlaceHandler = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const formData = new FormData();
-
       formData.append("title", inputValues.title.value);
       formData.append("description", inputValues.description.value);
       formData.append("image", inputValues.image.value);
@@ -71,43 +71,46 @@ const CreatePlace = (props) => {
     }
   };
 
-  console.log(inputValues.image.value)
-
   return (
-    <div className="login">
-      <form onSubmit={creatingPlaceHandler} className="form">
-        <Input
-          element="input"
-          type="text"
-          label="Title"
-          id="title"
-          validRules={{ type: "REQUIRE" }}
-          invalidText="This field can't be empty!"
-          inputValues={(value, isValid, id) =>
-            inputValuesHandler(value, isValid, id)
-          }
-        />
-        <ImageUpload 
-            id="image" inputValues={(value, isValid, id) =>
-            inputValuesHandler(value, isValid, id)
-          }  />
-        <Input
-          element="textarea"
-          label="Description"
-          id="description"
-          validRules={{ type: "MIN_LENGTH", count: 30 }}
-          invalidText="minnimal length 30 characters."
-          inputValues={(value, isValid, id) =>
-            inputValuesHandler(value, isValid, id)
-          }
-          rows="4"
-          cols="40"
-        />
-        <Button disabled={!allValid} className="form__btn">
-          Submit
-        </Button>
-      </form>
-    </div>
+    <>
+      <LoadingSpinner showSpinner={isLoading} />
+      <div className="login">
+        <form onSubmit={creatingPlaceHandler} className="form">
+          <Input
+            element="input"
+            type="text"
+            label="Title"
+            id="title"
+            validRules={{ type: "REQUIRE" }}
+            invalidText="This field can't be empty!"
+            inputValues={(value, isValid, id) =>
+              inputValuesHandler(value, isValid, id)
+            }
+          />
+          <ImageUpload
+            id="image"
+            inputValues={(value, isValid, id) =>
+              inputValuesHandler(value, isValid, id)
+            }
+          />
+          <Input
+            element="textarea"
+            label="Description"
+            id="description"
+            validRules={{ type: "MIN_LENGTH", count: 30 }}
+            invalidText="minnimal length 30 characters."
+            inputValues={(value, isValid, id) =>
+              inputValuesHandler(value, isValid, id)
+            }
+            rows="4"
+            cols="40"
+          />
+          <Button disabled={!allValid} className="form__btn">
+            Submit
+          </Button>
+        </form>
+      </div>
+    </>
   );
 };
 

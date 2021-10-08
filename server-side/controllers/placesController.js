@@ -47,6 +47,7 @@ const getPlaceById = async (req, res, next) => {
 };
 
 const createPlace = async (req, res, next) => {
+  console.log("Reached");
   try {
     const error = validationResult(req);
     if (!error.isEmpty()) {
@@ -54,15 +55,14 @@ const createPlace = async (req, res, next) => {
         .status(500)
         .json("Invalid input fileds.Make sure all the fileds are filled out.");
     }
-    console.log(error)
-    const { title, description, username,author } = req.body;
-    const image =req.file.path
+    const { title, description, username, author } = req.body;
+    const image = req.file.path;
 
     const createdPlace = await Place.create({
       title,
       description,
       image,
-      creator :{username,author},
+      creator: { username, author },
       rating: [],
       date: new Date(),
     });
@@ -70,7 +70,6 @@ const createPlace = async (req, res, next) => {
     const user = await User.findById(author);
     user.places.push(createdPlace);
     await user.save();
-    console.log(user);
 
     res.status(201).json(createdPlace);
   } catch (err) {
@@ -80,18 +79,18 @@ const createPlace = async (req, res, next) => {
 };
 
 const updatePlace = async (req, res, next) => {
-  console.log(req.body)
+  console.log(req.body);
   try {
     const error = validationResult(req);
     if (!error.isEmpty()) {
-      console.log(error)
+      console.log(error);
       res
         .status(500)
         .json("Invalid input fileds.Make sure all the fileds are filled out.");
     }
     const placeId = req.params.id;
     const { title, description, username, author, date } = req.body;
-    const image =req.file.path
+    const image = req.file.path;
     const place = await Place.findById(placeId);
 
     if (place.creator.author.toString() === req.userId) {
@@ -99,7 +98,7 @@ const updatePlace = async (req, res, next) => {
         title,
         description,
         image,
-       creator :{author,username},
+        creator: { author, username },
         date,
       });
       res.status(201).json(updatedPlace);
